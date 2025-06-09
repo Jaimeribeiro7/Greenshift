@@ -1,36 +1,13 @@
-import logging
-from logging.handlers import RotatingFileHandler
 import os
-from app import create_app
+import sys
 
-# Cria a aplicação Flask a partir da fábrica definida em app/__init__.py
-app = create_app()
+from django.core.wsgi import get_wsgi_application
 
-# Configuração de logging
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+# Adiciona o diretório base ao path do sistema (opcional mas recomendado)
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=10)
-file_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-))
-file_handler.setLevel(logging.INFO)
+# Define o módulo de configurações padrão do Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NOME_DO_SEU_PROJETO.settings')
 
-app.logger.addHandler(file_handler)
-app.logger.setLevel(logging.INFO)
-app.logger.info('Aplicação iniciada.')
-
-# Tratamento global de erros (opcional)
-@app.errorhandler(500)
-def internal_error(error):
-    app.logger.error('Erro interno do servidor: %s', error)
-    return "Erro interno do servidor", 500
-
-@app.errorhandler(404)
-def not_found_error(error):
-    app.logger.warning('Página não encontrada: %s', error)
-    return "Página não encontrada", 404
-
-# Exposição explícita do app para o servidor WSGI
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+# Obtém a aplicação WSGI
+application = get_wsgi_application()
