@@ -1,0 +1,8 @@
+<h2>Dashboard</h2>
+<p>Total de clientes: {{ clientes }}</p>
+<p>Total de comissões: R$ {{ total_comissao }}</p>
+<p>Saldo disponível: R$ {{ saldo_disponivel }}</p>
+<a href="{% url 'clientes' %}">Ver clientes</a> |
+<a href="{% url 'financeiro' %}">Ver financeiro</a> |
+<a href="{% url 'materiais' %}">Materiais de apoio</a> |
+<a href="{% url 'logout' %}">Sair</a>
