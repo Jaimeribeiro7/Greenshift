@@ -1,1 +1,1 @@
-# Django settings com PostgreSQL
+ROOT_URLCONF = 'urls'
