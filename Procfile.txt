@@ -1,0 +1,1 @@
+web: gunicorn painel_comissoes_igreen_completo.wsgi
