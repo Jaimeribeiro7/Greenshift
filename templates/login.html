@@ -1,7 +1,149 @@
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="username" placeholder="Usuário"><br>
-  <input type="password" name="password" placeholder="Senha"><br>
-  <button type="submit">Entrar</button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | GreenShift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to right, #1abc9c, #16a085);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #2c3e50;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #1abc9c;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #149f86;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #aaa;
+        }
+
+        .google-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #db4437;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .google-login:hover {
+            background-color: #c23321;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .register-link {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Entrar no GreenShift</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Usuário ou Email</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div class="divider">ou</div>
+
+        <form action="{% url 'social:begin' 'google-oauth2' %}" method="post">
+            {% csrf_token %}
+            <button class="google-login" type="submit">Entrar com Google</button>
+        </form>
+
+        <div class="register-link">
+            Não tem uma conta? <a href="{% url 'registro' %}">Cadastrar-se</a>
+        </div>
+    </div>
+
+</body>
+</html>
