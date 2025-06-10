@@ -1,1 +1,4 @@
-# Registro no admin do Django
+from django.contrib import admin
+
+# from .models import SeuModelo
+# admin.site.register(SeuModelo)
