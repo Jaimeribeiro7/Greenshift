@@ -1,11 +1,6 @@
 import os
 from pathlib import Path
 
-INSTALLED_APPS = [
-    ...
-    'greenshift',
-]
-
 BASE_DIR = Path(__file__).resolve().parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'chave-secreta-segura')
