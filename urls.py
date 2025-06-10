@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from views import (
+from greenshift.views import (
     login_view,
     dashboard_view,
     clientes_view,
